@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人介绍 - 前端工程师</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* 导航栏样式 */
+        nav {
+            background-color: rgba(255, 255, 255, 0.95);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: #ffd700;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #ffd700;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #ffd700;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: #333;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+
+        header {
+            background: linear-gradient(135deg, #ffd700, #ffa500);
+            color: white;
+            padding: 8rem 0 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin-top: 60px;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+            opacity: 0.1;
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .profile {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .profile p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid white;
+            margin-bottom: 1.5rem;
+            object-fit: cover;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .yuque-icon {
+            display: flex;
+            align-items: center;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px);
+        }
+
+        .section-title {
+            text-align: center;
+            margin: 3rem 0 2rem;
+            color: #ffd700;
+            font-size: 2rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: #ffd700;
+            margin: 1rem auto;
+        }
+
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 1rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #ffd700, #ffa500);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .card-title {
+            flex: 1;
+        }
+
+        .card h3 {
+            color: #ffd700;
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .company-logo {
+            /* width: 60px; */
+            /* height: 60px; */
+            object-fit: contain;
+            margin-left: 15px;
+            border-radius: 8px;
+            /* background-color: #f8f8f8; */
+            padding: 5px;
+            /* box-shadow: 0 3px 6px rgba(0,0,0,0.1); */
+        }
+
+        .card p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .card .content {
+            flex-grow: 1;
+        }
+
+        .card .date {
+            color: #999;
+            font-size: 0.9rem;
+            margin-top: auto;
+        }
+        
+        .card .read-more {
+            color: #ffd700;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 1rem;
+            position: relative;
+        }
+        
+        .card .read-more::after {
+            content: '→';
+            margin-left: 5px;
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+        
+        .card .read-more:hover::after {
+            transform: translateX(5px);
+        }
+
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            padding: 1rem;
+        }
+
+        .skill-item {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+        .skill-icon {
+            font-size: 2.5rem;
+            color: #ffd700;
+            margin-bottom: 1rem;
+        }
+
+        .skill-name {
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-level-bar {
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            margin-top: 1rem;
+            overflow: hidden;
+        }
+
+        .skill-level {
+            height: 100%;
+            background: linear-gradient(90deg, #ffd700, #ffa500);
+            border-radius: 4px;
+        }
+
+        /* 回到顶部按钮 */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: #ffd700;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background-color: #ffa500;
+            transform: translateY(-5px);
+        }
+
+        /* 页脚样式 */
+        footer {
+            background: #333;
+            color: white;
+            padding: 3rem 0;
+            margin-top: 3rem;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-section h3 {
+            color: #ffd700;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-section p {
+            margin-bottom: 1rem;
+            color: #ccc;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section ul li a:hover {
+            color: #ffd700;
+        }
+
+        .contact-info i {
+            margin-right: 10px;
+            color: #ffd700;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid #444;
+            color: #999;
+        }
+
+        .footer-bottom p {
+            font-size: 0.9rem;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .nav-container {
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                position: absolute;
+                right: 0;
+                top: 70px;
+                background-color: rgba(255, 255, 255, 0.95);
+                flex-direction: column;
+                width: 100%;
+                align-items: center;
+                transform: translateX(100%);
+                transition: transform 0.5s ease-in;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                padding: 1rem 0;
+            }
+
+            .nav-links.active {
+                transform: translateX(0);
+            }
+
+            .nav-links li {
+                margin: 1rem 0;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .hamburger.active div:nth-child(1) {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+
+            .hamburger.active div:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active div:nth-child(3) {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+            
+            header {
+                /* padding: 6rem 0 3rem; */
+            }
+            
+            .profile h1 {
+                font-size: 2rem;
+            }
+            
+            .profile-img {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+    </style>
+<script defer src="index.js"></script></head>
+<body>
+    <!-- 导航栏 -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">Camila</a>
+            <ul class="nav-links">
+                <li><a href="#about">关于我</a></li>
+                <li><a href="#experience">实习经历</a></li>
+                <li><a href="#studio">工作室经历</a></li>
+                <li><a href="#skills">技能</a></li>
+                <li><a href="#contact">联系我</a></li>
+            </ul>
+            <div class="hamburger">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 头部信息 -->
+    <header id="about">
+        <div class="container">
+            <div class="profile">
+                <img src="images/chenhaibin.jpg" alt="Camila的照片" class="profile-img">
+                <h1>Camila-前端工程师</h1>
+                <p>重庆邮电大学 - 计算机科学与技术</p>
+                <p>热爱前端开发，追求极致用户体验</p>
+                <div class="social-links">
+                    <a href="https://github.com/cychenhaibin" title="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" title="微博"><i class="fab fa-weibo"></i></a>
+                    <a href="#" title="知乎"><i class="fab fa-zhihu"></i></a>
+                    <a href="https://www.yuque.com/cychenhaibin" title="语雀" class="yuque-icon">
+                        <!-- <img width="24px" height="24px" src="https://mdn.alipayobjects.com/huamei_0prmtq/afts/img/A*sRUdR543RjcAAAAAAAAAAAAADvuFAQ/original" alt="语雀"> -->
+                        <img width="24px" height="24px" src="https://mdn.alipayobjects.com/huamei_0prmtq/afts/img/A*PXAJTYXseTsAAAAAAAAAAAAADvuFAQ/original" alt="语雀">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- 实习经历 -->
+        <h2 class="section-title" id="experience">实习经历</h2>
+        <div class="cards-container">
+           <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h3>深圳虾皮物流网络科技有限公司（Shopee）</h3>
+                        <p>部门：SSC-Shopee Supply Chain</p>
+                        <p>职位：前端开发实习生</p>
+                    </div>
+                    <img width="151.8px" height="48px" src="https://public-cdn.mokahr.com/shopee/cf6b96d2-9e2d-483c-9ea9-b077d6543e47.png" alt="Shopee Logo" class="company-logo">
+                </div>
+                <div class="content">
+                    <p>敬请期待</p>
+                </div>
+                <div class="date">2025.04 - 2025.06</div>
+                <a href="./pages/shopee-internShip.html" class="read-more">查看详情</a>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h3>智荟通（重庆）数智科技有限公司</h3>
+                        <p>部门：数字教育</p>
+                        <p>职位：前端开发实习生</p>
+                    </div>
+                    <img src="data:image/png;base64,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" alt="智荟通 Logo" class="company-logo">
+                </div>
+                <div class="content">
+                    <p>参与公司编辑器产品的前端开发，负责页面的设计与实现，重构题库系统、版式开发，使用Vue.js框架进行组件开发，优化网站性能提升用户体验。</p>
+                </div>
+                <div class="date">2024.10 - 2025.02</div>
+                <a href="./pages/zht-internShip.html" class="read-more">查看详情</a>
+            </div>
+        </div>
+
+        <!-- 工作室经历 -->
+        <h2 class="section-title" id="studio">工作室经历</h2>
+        <div class="cards-container">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h3>蓝山工作室</h3>
+                        <p>2022届 - 前端研发部干事</p>
+                    </div>
+                    <img width="100px" height="100px" src="https://avatars.githubusercontent.com/u/115478045?s=200&v=4" alt="蓝山工作室 Logo" class="company-logo">
+                </div>
+                <div class="content">
+                    <p>这里是 We 重邮的起源地，是重庆邮电大学信息化办公室指导的学生开发团队。</p>
+
+                    <p>我们通过开展项目研发、组织信息化科技竞赛以及交流学习，提高学生实践能力和综合能力，培养信息化创新创业人才。</p>
+                        
+                    <p>
+                        <ul style="padding-left: 2em;">
+                            <li>“We重邮”是全国高校第一个上线的微信小程序，入选2017年度中国“互联网+”优秀案例50强，获第五届中国“互联网＋”大学生创新创业大赛重庆市银奖。</li>
+                            <li>研发 2023 年重庆市辅导员大赛竞赛系统，确保重庆市辅导员大赛的顺利进行，收获重庆市教委和参赛老师的一致好评。</li>
+                            <li>设计企业微信扫码签到功能，为师生提供便捷签到服务，被企业微信官方纳入优秀案例进行分享。</li>
+                            <li>完成重庆数字教育治理运行中心搭建，有效治理全市教师、学生等数据600万条，实现了全市教育数据的一屏统览，一键调度，为全市教育治理决策提供了系统支撑。获得市教委广泛好评。</li>
+                        </ul>
+                    </p>
+                    
+                    <p>工作室包含产品及运营部、前端开发部、后端研发部（Java、Go、Rust 方向）、UI 创意部和运维安全部。</p>
+                        
+                        
+                </div>
+                <div class="date">2023.12 - 至今</div>
+                <a href="./pages/lanshan-studio.html" class="read-more">查看详情</a>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h3>CQUPTHub</h3>
+                        <p>2022届 - 前端研发部</p>
+                    </div>
+                    <img width="100px" height="100px" src="https://webapp.codeghub.com/release/app/admin/home/assets/svg/logo.eb9f2a99.svg" alt="CQUPTHub Logo" class="company-logo">
+                </div>
+                <div class="content">
+                    <p>CquptHub 是一个由学生自发组织开展的学生工作室，有幸邀请到了两位校内老师和一位校外公司技术总监作为工作室的指导老师，为工作室提供了丰富的机会和资源。</p>
+
+                    <p>CquptHub 是一个专注于数字教材前端可视化小游戏创新与研发的工作室。我们致力于为教育行业提供高质量、互动性强、富有教育意义的前端可视化小游戏，以激发学生的学习兴趣，提升他们的学习体验。</p>
+                        
+                    <p>我们的团队由一群充满热爱、激情，富有创造力和专业技术的的小伙伴组成，对数字教材和小游戏开发有深厚的理解和丰富的经验。我们紧跟行业发展趋势，不断探索创新，力将最新的前端技术融入到我们的作品中，为用户带来卓越的视觉和交互体验。</p>
+                </div>
+                <div class="date">2024.03 - 至今</div>
+                <a href="./pages/cqupt-studio.html" class="read-more">查看详情</a>
+            </div>
+        </div>
+
+        <!-- 技能部分 -->
+        <h2 class="section-title" id="skills">技能专长</h2>
+        <div class="skills-container">
+            <div class="skill-item">
+                <div class="skill-icon"><i class="fab fa-html5"></i></div>
+                <h3 class="skill-name">HTML5</h3>
+                <div class="skill-level-bar">
+                    <div class="skill-level" style="width: 95%;"></div>
+                </div>
+            </div>
+            
+            <div class="skill-item">
+                <div class="skill-icon"><i class="fab fa-css3-alt"></i></div>
+                <h3 class="skill-name">CSS3</h3>
+                <div class="skill-level-bar">
+                    <div class="skill-level" style="width: 90%;"></div>
+                </div>
+            </div>
+            
+            <div class="skill-item">
+                <div class="skill-icon"><i class="fab fa-js"></i></div>
+                <h3 class="skill-name">JavaScript</h3>
+                <div class="skill-level-bar">
+                    <div class="skill-level" style="width: 85%;"></div>
+                </div>
+            </div>
+            
+            <div class="skill-item">
+                <div class="skill-icon"><i class="fab fa-react"></i></div>
+                <h3 class="skill-name">React</h3>
+                <div class="skill-level-bar">
+                    <div class="skill-level" style="width: 80%;"></div>
+                </div>
+            </div>
+            
+            <div class="skill-item">
+                <div class="skill-icon"><i class="fab fa-vuejs"></i></div>
+                <h3 class="skill-name">Vue.js</h3>
+                <div class="skill-level-bar">
+                    <div class="skill-level" style="width: 75%;"></div>
+                </div>
+            </div>
+            
+            <div class="skill-item">
+                <div class="skill-icon"><i class="fas fa-mobile-alt"></i></div>
+                <h3 class="skill-name">响应式设计</h3>
+                <div class="skill-level-bar">
+                    <div class="skill-level" style="width: 88%;"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer id="contact">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>关于我</h3>
+                <p>我是一名前端工程师，热爱创造和解决问题。我致力于构建优秀的用户界面和提供卓越的用户体验。</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>快速链接</h3>
+                <ul>
+                    <li><a href="#about">关于我</a></li>
+                    <li><a href="#experience">实习经历</a></li>
+                    <li><a href="#studio">工作室经历</a></li>
+                    <li><a href="#skills">技能</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>联系方式</h3>
+                <p class="contact-info"><i class="fas fa-envelope"></i> haibinchenleo@outlook.com</p>
+                <p class="contact-info"><i class="fas fa-phone"></i> +86 156 9688 6898</p>
+                <p class="contact-info"><i class="fas fa-map-marker-alt"></i> 重庆市南岸区重庆邮电大学</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 Camila | 前端工程师 | 保留所有权利</p>
+        </div>
+    </footer>
+
+    <!-- 回到顶部按钮 -->
+    <div class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        // 汉堡菜单交互
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // 关闭菜单当点击链接时
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // 回到顶部按钮
+        const backToTopButton = document.querySelector('.back-to-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
+
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // 导航栏滚动效果
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
+                nav.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                nav.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+                nav.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+
+        // 技能条动画
+        document.addEventListener('DOMContentLoaded', () => {
+            const skillLevels = document.querySelectorAll('.skill-level');
+            skillLevels.forEach(level => {
+                const width = level.style.width;
+                level.style.width = '0';
+
+                setTimeout(() => {
+                    level.style.transition = 'width 1s ease-in-out';
+                    level.style.width = width;
+                }, 300);
+            });
+        });
+
+        // 卡片详情点击事件
+        // document.querySelectorAll('.read-more').forEach(button => {
+        //     button.addEventListener('click', (e) => {
+        //         e.preventDefault();
+        //         alert('详细内容正在建设中，敬请期待！');
+        //     });
+        // });
+    </script>
+</body>
+</html>
