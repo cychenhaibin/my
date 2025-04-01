@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -130,8 +131,13 @@
         }
 
         @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         .profile {
@@ -174,7 +180,7 @@
             font-size: 1.5rem;
             transition: transform 0.3s ease;
         }
-        
+
         .yuque-icon {
             display: flex;
             align-items: center;
@@ -212,7 +218,7 @@
             background: white;
             border-radius: 15px;
             padding: 2rem;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             position: relative;
             overflow: hidden;
@@ -223,7 +229,7 @@
 
         .card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
         }
 
         .card::before {
@@ -278,7 +284,7 @@
             font-size: 0.9rem;
             margin-top: auto;
         }
-        
+
         .card .read-more {
             color: #ffd700;
             font-weight: 500;
@@ -287,14 +293,14 @@
             margin-top: 1rem;
             position: relative;
         }
-        
+
         .card .read-more::after {
             content: '→';
             margin-left: 5px;
             transition: transform 0.3s ease;
             display: inline-block;
         }
-        
+
         .card .read-more:hover::after {
             transform: translateX(5px);
         }
@@ -311,13 +317,13 @@
             border-radius: 10px;
             padding: 1.5rem;
             text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
         }
 
         .skill-item:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
         }
 
         .skill-icon {
@@ -364,7 +370,7 @@
             opacity: 0;
             visibility: hidden;
             z-index: 1000;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
         .back-to-top.visible {
@@ -440,16 +446,71 @@
             font-size: 0.9rem;
         }
 
+        /* 在style标签内添加以下CSS */
+        .resume-dropdown {
+            position: relative;
+        }
+
+        .resume-dropdown .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 35px;
+            left: -30px;
+            background-color: white;
+            width: 100px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1100;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .resume-dropdown .dropdown-content a {
+            color: #333;
+            padding: 10px 15px;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .resume-dropdown .dropdown-content a:hover {
+            background-color: #f1f1f1;
+            color: #ffd700;
+        }
+
+        .resume-dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* 响应式设计调整 */
+        @media (max-width: 768px) {
+            .resume-dropdown .dropdown-content {
+                position: static;
+                box-shadow: none;
+                background-color: transparent;
+                padding-left: 20px;
+            }
+
+            .resume-dropdown:hover .dropdown-content {
+                display: none;
+            }
+
+            .resume-dropdown.active .dropdown-content {
+                display: block;
+            }
+        }
+
+
         /* 响应式设计 */
         @media (max-width: 768px) {
             .container {
                 padding: 1rem;
             }
-            
+
             .nav-container {
                 padding: 1rem;
             }
-            
+
             .nav-links {
                 position: absolute;
                 right: 0;
@@ -487,27 +548,29 @@
             .hamburger.active div:nth-child(3) {
                 transform: rotate(45deg) translate(-5px, -6px);
             }
-            
+
             header {
-                /* padding: 6rem 0 3rem; */
+                padding: 6rem 0;
             }
-            
+
             .profile h1 {
                 font-size: 2rem;
             }
-            
+
             .profile-img {
                 width: 120px;
                 height: 120px;
             }
-            
+
             .footer-container {
                 grid-template-columns: 1fr;
                 text-align: center;
             }
+
         }
     </style>
 </head>
+
 <body>
     <!-- 导航栏 -->
     <nav>
@@ -519,6 +582,13 @@
                 <li><a href="#studio">工作室经历</a></li>
                 <li><a href="#skills">技能</a></li>
                 <li><a href="#contact">联系我</a></li>
+                <li class="resume-dropdown">
+                    <a href="javascript:void(0)">简历 <i class="fas fa-caret-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="./assets/resume.pdf" target="_blank">预览</a>
+                        <a href="javascript:void(0)" onclick="downloadResume()">下载</a>
+                    </div>
+                </li>
             </ul>
             <div class="hamburger">
                 <div></div>
@@ -543,7 +613,9 @@
                     <a href="#" title="知乎"><i class="fab fa-zhihu"></i></a>
                     <a href="https://www.yuque.com/cychenhaibin" title="语雀" class="yuque-icon">
                         <!-- <img width="24px" height="24px" src="https://mdn.alipayobjects.com/huamei_0prmtq/afts/img/A*sRUdR543RjcAAAAAAAAAAAAADvuFAQ/original" alt="语雀"> -->
-                        <img width="24px" height="24px" src="https://mdn.alipayobjects.com/huamei_0prmtq/afts/img/A*PXAJTYXseTsAAAAAAAAAAAAADvuFAQ/original" alt="语雀">
+                        <img width="24px" height="24px"
+                            src="https://mdn.alipayobjects.com/huamei_0prmtq/afts/img/A*PXAJTYXseTsAAAAAAAAAAAAADvuFAQ/original"
+                            alt="语雀">
                     </a>
                 </div>
             </div>
@@ -554,14 +626,16 @@
         <!-- 实习经历 -->
         <h2 class="section-title" id="experience">实习经历</h2>
         <div class="cards-container">
-           <div class="card">
+            <div class="card">
                 <div class="card-header">
                     <div class="card-title">
                         <h3>深圳虾皮物流网络科技有限公司（Shopee）</h3>
                         <p>部门：SSC-Shopee Supply Chain</p>
                         <p>职位：前端开发实习生</p>
                     </div>
-                    <img width="151.8px" height="48px" src="https://public-cdn.mokahr.com/shopee/cf6b96d2-9e2d-483c-9ea9-b077d6543e47.png" alt="Shopee Logo" class="company-logo">
+                    <img width="151.8px" height="48px"
+                        src="https://public-cdn.mokahr.com/shopee/cf6b96d2-9e2d-483c-9ea9-b077d6543e47.png"
+                        alt="Shopee Logo" class="company-logo">
                 </div>
                 <div class="content">
                     <p>敬请期待</p>
@@ -577,7 +651,8 @@
                         <p>部门：数字教育</p>
                         <p>职位：前端开发实习生</p>
                     </div>
-                    <img src="data:image/png;base64,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" alt="智荟通 Logo" class="company-logo">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAAXNSR0IArs4c6QAAAARzQklUCAgICHwIZIgAAAdqSURBVFiF7Zh/cFTVFce/5973dkMSCiWBTik/EkJBCYWhDIx1BoqgiNMSbe2zkAy02A6tVOuPSimDMS/N6AiU6lCnSEbLj0pTWMZ0WsVGprBUqBYIP7SxE1OSxQImaUwAs7/ee/ee/kESks2GDSaO//Cd2dl5s/ee89lz7z3n3Afc0A19tqKBGliSY+dAGuqmM955G7YeDKjuGjBg0fjiVwHMY6JqEFdJzRVDsseeK6/+kTsIfBCDYCONCRkEngvGU5qotr313D5rwpphg2B7UAABAIyu5TCJMd/U/lsGw24/APm6tgFf+RBYy37YTWnbSDVgSW7xYqB4Gmn87cNceSwYtL1k4/r7L5Z/aW2W6xfzwCVfZ+/nz/zxvxsuDAhQMPIY/EsQ2V8MqdDSnOLnPeFsC9Svv9RBVgdgPl+bkb6bZ+cLrR5wgeXQSAexEpT+XCr/KQGvmCdFEJuZ9WIQNhrsf2Bp7pOPT24Qr4WAta5Qb5LGPUxYxIwMAEQQDADWmEeHGEamDa1XgWESYT8Ah4HFvR0xAcQ9AtTjZ2ax9/T/llY2tA3vwQew0upFP+Q0ACugOR3MgdocLHSgtkGLWUqIzRppXwazRYQtMMW7RRPtzxlG5l4Aq8F8GCRn/6GhrICJ3u7JxfTK6dapr5xsvj0RuQdgMAjBzCXqkvvvvSeaHqs82RN0e8iOVTSU7fJIziKiYwQ1DoyxDP2w0DpIHDtGEF/VjD2OD83s6XIQFhKodGhWU0FFg/0OrpwjAIDpk/Snd1q/svdU8+80qxMMmndNwI5oERgjmWiDJvfkhG9M/07iOgRCdiOb4lskcPLqNEgAY0G8joAqM+rewuBFBGyYFBJl5dXlPRI3Eck5G7/9G097b4NEEcBmIktSQO0xtNJVArRcK76cPnLorcn2f8X7dsv5cbITsCssfMW7FGwKEL+aOaLJTlYCSZCQPnMBNP7Cmu9WnobWvStlL0AvEocbcRxVd3A3p7XMuvBWw/PdVqVPUbdvAsBSuX42HkyMXFcgNHtnXj99570zRhZ+/PHlf3kRB07YSQUYRDwch9Meh2VZfF9+vtNae74+JV2CGIBQ8LaH7It9D2Ku/3PNB0SkEQPi4RicSLzXsB5p5hCA0eE4uB8R666BdhzR1ihMg8Cit6VeedAJx8DXx9dVhzvMnyfiAJFs6+/8WDQKLQSIUgEeAtyRMQCM0utjBADNAAkgZmhZmhPC5X7PbIvCTZMQSQB7HZJ4JA4nHEd/COcFoQloBMAQYqch5AYmjHNJ19XmOlP7yxeNxuCEY4i1R1MDeuEOwEQZvbsTGyUswKsJ8lZWvFMO820CU40wzLmG8DUmg7FhCzDLHts8GoUbjsNLcop77UG3PQZNDJlx5ZlBTAwplNyzJOfJIIF3T86RR+yg7VlWQKij9BKB9zP4r9E2J0NArMirU7Xdcx+D6e7JazKHxv1FtaQWEOM2JjAQ6+SDFLGke7BXBJ1IDF57twiSPMBEzwKIEfh+AAdrQ/pY0fjiQtS8JyH0L7Tm41LQ7RL6nzBx+f0cXWyNsUcAwLI8e1Th+JL1GY7/jAa2gDFfA0fBKB6emdYMAIi1wu1Ib6kjGHZAYPg7njvq5+qVM1ca4Uujv6CV/jEYRZqw0xfR5q7QUzsAYEneulOGFrUcByB4mc+n9i3NeWKup9QLJDACoL8z8XYjEq2MzZ0dCwTuU50+o1FA6DiSBDABMAiorDiYIFATMGzb9mzb1gC4oyKcA/CENWHNRlObjzBR1zIKTd/XoAKfwGIP8nFDoy5O6jUw2kjTCmf21De6oAJXXVrWHqnbPpIsCckIEyJ4CG4kCwDf2YLG43gr6/hDizbvVzF58LfBnzSho+Z1NKulFvZ0HRypsVdLMpRANiv1shJ6EbQ8BfKW7Qo93YSzV72snLnV9H0+fJOW8i7R3jTHA08jADrJDaQHsg1bNN82/GEGT2fNNxMwhYEhYMSJ+bBivUPCe33L4bUXkbRAM1lTSjP8UTUj7ur6DMNU20N2IwDYti0uVGVOEgL3QNAPQRhLRALgFpA4TYLqNLjyhQOPHugTsLssa48c9kFdthC+Baz0fNJsMXMmMzUyqx1S+H9dXv2zjxI74O9NLM53XXqDTV5Y8Z+yGguWHDp95tek5J+CqAAEA4R6ItolhDik3fDRrdUlUUqwkxIwUT/It0cwmwVa40GwngHgImt6NmJ6zwXes9s7x62aYmdejKj7hZT7DOkzAO8ZEH0TRHEIVEqJ8jNZ3j/6unx9YsBO3TXxIf8IJ+sOEryOwbMYVAfmVZPOikOduW/laDu93VSPEMRaAgSIdpNfluXVqrPX+3rkEzciK2duNdtbzi8H4WkGDyem9ZnZjWVtLaPGmCS2MXgOCEcMko/9vr6kOnErfOqAnSrMXTceLLcCfAdAVUw8FYxRAJUOzWr8VV8Na3+V4vafWu9efPPSvOx7AxGOpoNQSIAL8JLJIblz04ebVGoL19aAI9gpC5Y0cm9eJbU48vJZ+8Rg2b2hG/qs9X9kpnclfs1kSwAAAABJRU5ErkJggg=="
+                        alt="智荟通 Logo" class="company-logo">
                 </div>
                 <div class="content">
                     <p>参与公司编辑器产品的前端开发，负责页面的设计与实现，重构题库系统、版式开发，使用Vue.js框架进行组件开发，优化网站性能提升用户体验。</p>
@@ -596,25 +671,26 @@
                         <h3>蓝山工作室</h3>
                         <p>2022届 - 前端研发部干事</p>
                     </div>
-                    <img width="100px" height="100px" src="https://avatars.githubusercontent.com/u/115478045?s=200&v=4" alt="蓝山工作室 Logo" class="company-logo">
+                    <img width="100px" height="100px" src="https://avatars.githubusercontent.com/u/115478045?s=200&v=4"
+                        alt="蓝山工作室 Logo" class="company-logo">
                 </div>
                 <div class="content">
                     <p>这里是 We 重邮的起源地，是重庆邮电大学信息化办公室指导的学生开发团队。</p>
 
                     <p>我们通过开展项目研发、组织信息化科技竞赛以及交流学习，提高学生实践能力和综合能力，培养信息化创新创业人才。</p>
-                        
+
                     <p>
-                        <ul style="padding-left: 2em;">
-                            <li>“We重邮”是全国高校第一个上线的微信小程序，入选2017年度中国“互联网+”优秀案例50强，获第五届中国“互联网＋”大学生创新创业大赛重庆市银奖。</li>
-                            <li>研发 2023 年重庆市辅导员大赛竞赛系统，确保重庆市辅导员大赛的顺利进行，收获重庆市教委和参赛老师的一致好评。</li>
-                            <li>设计企业微信扫码签到功能，为师生提供便捷签到服务，被企业微信官方纳入优秀案例进行分享。</li>
-                            <li>完成重庆数字教育治理运行中心搭建，有效治理全市教师、学生等数据600万条，实现了全市教育数据的一屏统览，一键调度，为全市教育治理决策提供了系统支撑。获得市教委广泛好评。</li>
-                        </ul>
+                    <ul style="padding-left: 2em;">
+                        <li>“We重邮”是全国高校第一个上线的微信小程序，入选2017年度中国“互联网+”优秀案例50强，获第五届中国“互联网＋”大学生创新创业大赛重庆市银奖。</li>
+                        <li>研发 2023 年重庆市辅导员大赛竞赛系统，确保重庆市辅导员大赛的顺利进行，收获重庆市教委和参赛老师的一致好评。</li>
+                        <li>设计企业微信扫码签到功能，为师生提供便捷签到服务，被企业微信官方纳入优秀案例进行分享。</li>
+                        <li>完成重庆数字教育治理运行中心搭建，有效治理全市教师、学生等数据600万条，实现了全市教育数据的一屏统览，一键调度，为全市教育治理决策提供了系统支撑。获得市教委广泛好评。</li>
+                    </ul>
                     </p>
-                    
+
                     <p>工作室包含产品及运营部、前端开发部、后端研发部（Java、Go、Rust 方向）、UI 创意部和运维安全部。</p>
-                        
-                        
+
+
                 </div>
                 <div class="date">2023.12 - 至今</div>
                 <a href="./pages/lanshan-studio.html" class="read-more">查看详情</a>
@@ -625,14 +701,18 @@
                         <h3>CQUPTHub</h3>
                         <p>2022届 - 前端研发部</p>
                     </div>
-                    <img width="100px" height="100px" src="https://webapp.codeghub.com/release/app/admin/home/assets/svg/logo.eb9f2a99.svg" alt="CQUPTHub Logo" class="company-logo">
+                    <img width="100px" height="100px"
+                        src="https://webapp.codeghub.com/release/app/admin/home/assets/svg/logo.eb9f2a99.svg"
+                        alt="CQUPTHub Logo" class="company-logo">
                 </div>
                 <div class="content">
                     <p>CquptHub 是一个由学生自发组织开展的学生工作室，有幸邀请到了两位校内老师和一位校外公司技术总监作为工作室的指导老师，为工作室提供了丰富的机会和资源。</p>
 
-                    <p>CquptHub 是一个专注于数字教材前端可视化小游戏创新与研发的工作室。我们致力于为教育行业提供高质量、互动性强、富有教育意义的前端可视化小游戏，以激发学生的学习兴趣，提升他们的学习体验。</p>
-                        
-                    <p>我们的团队由一群充满热爱、激情，富有创造力和专业技术的的小伙伴组成，对数字教材和小游戏开发有深厚的理解和丰富的经验。我们紧跟行业发展趋势，不断探索创新，力将最新的前端技术融入到我们的作品中，为用户带来卓越的视觉和交互体验。</p>
+                    <p>CquptHub 是一个专注于数字教材前端可视化小游戏创新与研发的工作室。我们致力于为教育行业提供高质量、互动性强、富有教育意义的前端可视化小游戏，以激发学生的学习兴趣，提升他们的学习体验。
+                    </p>
+
+                    <p>我们的团队由一群充满热爱、激情，富有创造力和专业技术的的小伙伴组成，对数字教材和小游戏开发有深厚的理解和丰富的经验。我们紧跟行业发展趋势，不断探索创新，力将最新的前端技术融入到我们的作品中，为用户带来卓越的视觉和交互体验。
+                    </p>
                 </div>
                 <div class="date">2024.03 - 至今</div>
                 <a href="./pages/cqupt-studio.html" class="read-more">查看详情</a>
@@ -649,7 +729,7 @@
                     <div class="skill-level" style="width: 95%;"></div>
                 </div>
             </div>
-            
+
             <div class="skill-item">
                 <div class="skill-icon"><i class="fab fa-css3-alt"></i></div>
                 <h3 class="skill-name">CSS3</h3>
@@ -657,7 +737,7 @@
                     <div class="skill-level" style="width: 90%;"></div>
                 </div>
             </div>
-            
+
             <div class="skill-item">
                 <div class="skill-icon"><i class="fab fa-js"></i></div>
                 <h3 class="skill-name">JavaScript</h3>
@@ -665,7 +745,7 @@
                     <div class="skill-level" style="width: 85%;"></div>
                 </div>
             </div>
-            
+
             <div class="skill-item">
                 <div class="skill-icon"><i class="fab fa-react"></i></div>
                 <h3 class="skill-name">React</h3>
@@ -673,7 +753,7 @@
                     <div class="skill-level" style="width: 80%;"></div>
                 </div>
             </div>
-            
+
             <div class="skill-item">
                 <div class="skill-icon"><i class="fab fa-vuejs"></i></div>
                 <h3 class="skill-name">Vue.js</h3>
@@ -681,7 +761,7 @@
                     <div class="skill-level" style="width: 75%;"></div>
                 </div>
             </div>
-            
+
             <div class="skill-item">
                 <div class="skill-icon"><i class="fas fa-mobile-alt"></i></div>
                 <h3 class="skill-name">响应式设计</h3>
@@ -699,7 +779,7 @@
                 <h3>关于我</h3>
                 <p>我是一名前端工程师，热爱创造和解决问题。我致力于构建优秀的用户界面和提供卓越的用户体验。</p>
             </div>
-            
+
             <div class="footer-section">
                 <h3>快速链接</h3>
                 <ul>
@@ -707,9 +787,11 @@
                     <li><a href="#experience">实习经历</a></li>
                     <li><a href="#studio">工作室经历</a></li>
                     <li><a href="#skills">技能</a></li>
+                    <li><a href="./assets/resume.pdf" target="_blank">简历预览</a></li>
+                    <li><a href="./assets/resume.pdf" download="Camila_前端工程师简历.pdf">简历下载</a></li>
                 </ul>
             </div>
-            
+
             <div class="footer-section">
                 <h3>联系方式</h3>
                 <p class="contact-info"><i class="fas fa-envelope"></i> haibinchenleo@outlook.com</p>
@@ -717,7 +799,7 @@
                 <p class="contact-info"><i class="fas fa-map-marker-alt"></i> 重庆市南岸区重庆邮电大学</p>
             </div>
         </div>
-        
+
         <div class="footer-bottom">
             <p>&copy; 2025 Camila | 前端工程师 | 保留所有权利</p>
         </div>
@@ -790,6 +872,41 @@
             });
         });
 
+        const resumeDropdown = document.querySelector('.resume-dropdown');
+        if (resumeDropdown) {
+            resumeDropdown.addEventListener('click', function (e) {
+                if (window.innerWidth <= 768) {
+                    if (e.target.tagName !== 'A' || !e.target.getAttribute('download')) {
+                        e.preventDefault();
+                        this.classList.toggle('active');
+                    }
+                }
+            });
+        }
+
+        // 在您的script标签内添加以下内容
+        function downloadResume() {
+            fetch('./assets/resume.pdf')
+                .then(response => response.blob())  // 获取文件并转化为 Blob
+                .then(blob => {
+                    // 创建一个临时的下载链接
+                    const link = document.createElement('a');
+                    const url = URL.createObjectURL(blob); // 创建对象 URL
+                    link.href = url;
+                    link.download = 'Camila_前端工程师简历.pdf'; // 设置文件名
+                    link.click(); // 触发点击事件进行下载
+                    URL.revokeObjectURL(url); // 清理 URL
+                })
+                .catch(error => {
+                    console.error('下载简历时出错:', error);
+                    alert('下载简历时出现错误，请稍后再试。');
+                });
+        }
+
+
+
+
+
         // 卡片详情点击事件
         // document.querySelectorAll('.read-more').forEach(button => {
         //     button.addEventListener('click', (e) => {
@@ -799,4 +916,5 @@
         // });
     </script>
 </body>
+
 </html>
