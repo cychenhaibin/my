@@ -8,6 +8,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
+    :root {
+        --primary-color: #2196f3;
+        --secondary-color: #1976d2;
+        --accent-color: #64b5f6;
+        --text-color: #2f3640;
+        --background-color: #f5f6fa;
+        --card-background: rgba(255, 255, 255, 0.9);
+        --animation-timing: 0.3s;
+        --gradient-start: #2196f3;
+        --gradient-end: #64b5f6;
+    }
     * {
       margin: 0;
       padding: 0;
@@ -49,7 +60,7 @@
     .logo {
       font-weight: 700;
       font-size: 1.5rem;
-      color: #ffd700;
+      color: var(--primary-color);
       text-decoration: none;
     }
 
@@ -71,7 +82,7 @@
     }
 
     .nav-links a:hover {
-      color: #ffd700;
+      color: var(--primary-color);
     }
 
     .nav-links a::after {
@@ -81,7 +92,7 @@
       left: 0;
       width: 0;
       height: 2px;
-      background: #ffd700;
+      background: var(--primary-color);
       transition: width 0.3s ease;
     }
 
@@ -104,7 +115,7 @@
 
     /* 头部信息 */
     .header-detail {
-      background: linear-gradient(135deg, #ffd700, #ffa500);
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
       color: white;
       padding: 7rem 0 3rem;
       text-align: center;
@@ -198,12 +209,12 @@
       left: 0;
       width: 100%;
       height: 5px;
-      background: linear-gradient(90deg, #ffd700, #ffa500);
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
       border-radius: 15px 15px 0 0;
     }
 
     .section-title {
-      color: #ffd700;
+      color: var(--primary-color);
       font-size: 1.8rem;
       margin-bottom: 1.5rem;
       position: relative;
@@ -215,7 +226,7 @@
       display: block;
       width: 50px;
       height: 3px;
-      background: #ffd700;
+      background: var(--primary-color);
       position: absolute;
       bottom: 0;
       left: 0;
@@ -227,7 +238,7 @@
       padding: 1.5rem;
       margin-bottom: 2rem;
       box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-      border-left: 4px solid #ffd700;
+      border-left: 4px solid var(--primary-color);
     }
 
     .info-card h3 {
@@ -267,7 +278,7 @@
     }
 
     .project-content h3 {
-      color: #ffd700;
+      color: var(--primary-color);
       margin-bottom: 0.5rem;
     }
 
@@ -285,7 +296,7 @@
 
     .tag {
       background: rgba(255, 215, 0, 0.1);
-      color: #ffa500;
+      color: var(--secondary-color);
       padding: 0.3rem 0.8rem;
       border-radius: 50px;
       font-size: 0.8rem;
@@ -311,7 +322,7 @@
     }
 
     .skill-chip i {
-      color: #ffd700;
+      color: var(--primary-color);
     }
 
     /* 时间线 */
@@ -328,7 +339,7 @@
       top: 0;
       bottom: 0;
       width: 2px;
-      background: linear-gradient(to bottom, #ffd700, #ffa500);
+      background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
     }
 
     .timeline-item {
@@ -348,7 +359,7 @@
       width: 1rem;
       height: 1rem;
       border-radius: 50%;
-      background: linear-gradient(135deg, #ffd700, #ffa500);
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     }
 
     .timeline-date {
@@ -424,7 +435,7 @@
     }
 
     .skill-tag {
-      background: linear-gradient(135deg, #ffd700, #ffa500);
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
       color: white;
       padding: 0.5rem 1rem;
       border-radius: 50px;
@@ -451,7 +462,7 @@
       border-radius: 50%;
       object-fit: cover;
       margin-bottom: 1rem;
-      border: 3px solid #ffd700;
+      border: 3px solid var(--primary-color);
       box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     }
 
@@ -495,7 +506,7 @@
     .back-button {
       display: inline-flex;
       align-items: center;
-      color: #ffd700;
+      color: var(--primary-color);
       font-weight: 500;
       text-decoration: none;
       margin-top: 2rem;
@@ -508,7 +519,7 @@
     }
 
     .back-button:hover {
-      color: #ffa500;
+      color: var(--secondary-color);
     }
 
     .back-button:hover i {
@@ -533,7 +544,7 @@
     }
 
     .footer-section h3 {
-      color: #ffd700;
+      color: var(--primary-color);
       margin-bottom: 1.5rem;
       font-size: 1.3rem;
     }
@@ -558,12 +569,12 @@
     }
 
     .footer-section ul li a:hover {
-      color: #ffd700;
+      color: var(--primary-color);
     }
 
     .contact-info i {
       margin-right: 10px;
-      color: #ffd700;
+      color: var(--primary-color);
     }
 
     .footer-bottom {
