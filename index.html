@@ -129,14 +129,27 @@
         .hamburger {
             display: none;
             cursor: pointer;
+            padding: 0.5rem;
         }
 
         .hamburger div {
             width: 25px;
             height: 3px;
-            background-color: #333;
+            background-color: var(--text-color);
             margin: 5px;
             transition: all 0.3s ease;
+        }
+
+        .hamburger.active div:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .hamburger.active div:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active div:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
         }
 
         /* 头部区域 */
@@ -555,31 +568,87 @@
 
         /* 响应式设计调整 */
         @media (max-width: 768px) {
-            .resume-dropdown .dropdown-content {
-                position: static;
-                box-shadow: none;
-                background-color: transparent;
-                padding-left: 20px;
-            }
-
-            .resume-dropdown:hover .dropdown-content {
-                display: none;
-            }
-
-            .resume-dropdown.active .dropdown-content {
-                display: block;
-            }
-
             .container {
                 padding: 1rem;
             }
 
             .nav-container {
-                padding: 1rem;
+                padding: 0.5rem 1rem;
             }
 
-            .hero {
-                padding-top: 60px;
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(255, 255, 255, 0.95);
+                flex-direction: column;
+                padding: 1rem;
+                gap: 1rem;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .profile {
+                padding: 1.5rem;
+                margin: 1rem;
+            }
+
+            .profile h1 {
+                font-size: 2rem;
+            }
+
+            .profile-img {
+                width: 120px;
+                height: 120px;
+            }
+
+            .cards-container {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .card {
+                padding: 1.5rem;
+            }
+
+            .company-logo {
+                width: 40px;
+                height: 40px;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .social-links {
+                gap: 1rem;
+            }
+
+            .social-links a {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .profile h1 {
+                font-size: 1.8rem;
+            }
+
+            .profile p {
+                font-size: 1rem;
+            }
+
+            .card h3 {
+                font-size: 1.3rem;
             }
         }
 
@@ -961,6 +1030,23 @@
                 }
             },
             retina_detect: true
+        });
+
+        // 汉堡菜单交互
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+
+        // 点击导航链接时关闭菜单
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                hamburger.classList.remove('active');
+            });
         });
 
         // 简单的滚动到顶部功能
