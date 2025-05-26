@@ -597,11 +597,7 @@
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-date">第二阶段: 需求开发</div>
-                    <p>开发Agency Type Priotity 新增页面 列表 view弹框<br>开发BAU Driver Blacklist 新增页面 edit delete add<br>Driver-Ops Configuration 新增页面 add edit<br>Vehicle  Configuration<br>Scheduler<br>FM Schedule</p>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-date">第三阶段: 性能优化</div>
-                    <p>分析并优化前端页面性能，减少页面加载时间，提升用户体验。实施代码分割、懒加载等技术，优化资源加载策略。优化组件渲染性能，减少不必要的重渲染。</p>
+                    <img src="../assets/shopee.png" alt="" style="width: 100%;"/>
                 </div>
             </div>
         </section>
@@ -611,30 +607,111 @@
             <h2 class="section-heading">项目展示</h2>
             <p>在Shopee实习期间，我参与了以下项目的开发和维护：</p>
             <div class="projects-grid">
-<!--                <div class="project-card">-->
-<!--                    <img src="https://via.placeholder.com/400x200/FFD700/333?text=物流追踪系统" alt="物流追踪系统" class="project-image">-->
-<!--                    <div class="project-content">-->
-<!--                        <h3>物流追踪系统</h3>-->
-<!--                        <p>为物流合作伙伴提供包裹追踪功能，实现了实时状态更新和异常处理流程。</p>-->
-<!--                        <div class="project-tags">-->
-<!--                            <span class="tag">React</span>-->
-<!--                            <span class="tag">Redux</span>-->
-<!--                            <span class="tag">Ant Design</span>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="project-card">-->
-<!--                    <img src="https://via.placeholder.com/400x200/FFA500/333?text=仓库管理平台" alt="仓库管理平台" class="project-image">-->
-<!--                    <div class="project-content">-->
-<!--                        <h3>仓库管理平台</h3>-->
-<!--                        <p>为仓库管理人员提供直观的库存管理界面，优化了库存盘点和配送流程。</p>-->
-<!--                        <div class="project-tags">-->
-<!--                            <span class="tag">React</span>-->
-<!--                            <span class="tag">TypeScript</span>-->
-<!--                            <span class="tag">ECharts</span>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3>动态智能揽收系统 - BR市场算法升级</h3>
+                        <p>
+                            <b>配置页面优化（第一期：4.23）</b><br>
+                            Agency Type Priority 页面<br>
+                            <span style="color: #999;">
+                                • 实现 Agency 优先级配置功能，支持可视化设置。字段：Agency 类型、优先级权重、生效时间。
+                            </span><br>
+
+                            BAU Driver Blacklist 页面<br>
+                            <span style="color: #999;">
+                                • 配置仅服务于 Campaign 的司机黑名单。功能：支持批量导入/导出、模糊搜索、状态筛选。
+                            </span><br>
+
+                            Driver-Ops Configuration 页面<br>
+                            <span style="color: #999;">
+                                • 记录 Ops 与司机的负责关系，支持按区域分配任务。交互：下拉框动态加载可用司机，已分配的司机灰显。
+                            </span><br>
+
+                            Non-BAU Management 页面<br>
+                            <span style="color: #999;">
+                                • 配置非日常揽收日期（如节假日、Campaign 日）。联动业务规则，禁止在配置日期生成揽收任务。
+                            </span><br>
+
+                            Vehicle Configuration 页面<br>
+                            <span style="color: #999;">
+                                • 配置车辆类型、容量、通行限制（如大型车辆）。支持按 Cluster 维度批量操作（SEA 无此功能）。
+                            </span><br>
+                        </p>
+                        <p>
+                            <b>调度管理 & 动态 CT 组（第二期：5.10）</b><br>
+                            FM Cluster Polygon 配置<br>
+                            <span style="color: #999;">
+                                • 基于地图的 Cluster 区域划分，支持多边形绘制与编辑。 校验规则：Cluster 间不可重叠，需符合车辆通行限制。
+                            </span><br>
+
+                            Scheduler 页面<br>
+                            <span style="color: #999;">
+                                • 创建/更新 Pickup Task，支持动态路由参数配置。 展示任务状态（待计算、已分配、已完成）。
+                            </span><br>
+
+                            Dynamic CT Group 功能<br>
+                            <span style="color: #999;">
+                                • CT Group 列表页：展示计算任务组，支持按状态、Cluster 筛选。<br>
+                                • CT 详情页：复用 SEA 结构，新增 BR 字段（如 Toll Fee、Potential Missed PUP）。<br>
+                                • 地图操作页：
+                                拖拽调整路线节点，校验规则（如车辆数超限时禁止拖拽）。 展示 BR 特有数据：距离（保留 1 位小数）、费用（保留 2 位小数）。 <br>
+                                • 新增功能：Required Vehicle Num 输入、异常订单标记（Check Issue）。
+                            </span><br>
+                        </p>
+
+                        <p>
+                            <b>Fixed CT & Backup CT（第三期：5.23）</b><br>
+                            Fixed CT 页面（新增）<br>
+                            <span style="color: #999;">
+                                功能描述<br>
+                                • 创建 Fixed CT：支持手动创建固定计算任务（Fixed CT），指定 Cluster、时间窗、车辆类型等参数。<br>
+                                • Split/Merge CT Group：<br>
+                                • • Split：将一个 CT Group 按规则（如区域、订单量）拆分为多个子任务。<br>
+                                • • Merge：合并多个 CT Group，优化路径规划与司机负载均衡。<br>
+                                • Route ID 继承：<br>
+                                • • 为首次生成 Trip 时创建 CIOT 通行证，确保后续 Backup 或 Periodic 任务继承同一 Route ID，避免重复计费。<br>
+
+                                交互设计<br>
+                                • 地图操作页：<br>
+                                • • 拖拽调整路线节点，校验规则：<br>
+                                • • • 若 vehicle_num > 1，禁止手动修改路线。<br>
+                                • • • 跨 Cluster 拖拽时，弹出 Toast 提示：“当前操作可能导致路径超限，请确认！”<br>
+                                • • 展示字段：<br>
+                                • • • 距离（保留 1 位小数）、费用（保留 2 位小数）、预计耗时。<br>
+                                • • 新增功能：<br>
+                                • • • Required Vehicle Num：输入指定车型数量，系统自动校验资源可用性。<br>
+                                • • • Check Issue：标记异常订单（如地址错误、包裹超限），高亮显示并同步至 Ops 处理。<br>
+                            </span>
+                            Backup CT 页面<br>
+                            <span style="color: #999;">
+                                功能描述<br>
+                                • 手动插入 Trip：支持 Ops 在突发情况（如车辆故障、订单激增）时手动插入备用揽收任务。<br>
+                                • 同步至 FM Schedule：<br>
+                                • • 接口字段对齐：确保新增 Trip 的 Route ID、时间窗、费用明细完整传递至下游系统。<br>
+                                • 费用分摊规则展示：<br>
+                                • • 按 Trip 维度展示成本分摊比例（如司机工资、高速费、CIOT 通行证费用）。<br>
+                                • • 数据来源：对接 Finance 系统 API，实时更新费用明细。<br>
+
+                                交互设计<br>
+                                • 列表页：<br>
+                                • • 支持按状态筛选（待分配、进行中、已完成）、按 Cluster 分组。<br>
+                                • • 批量操作：一键分配司机、导出任务明细。<br>
+                                • 详情页：<br>
+                                • • • 复用 SEA 结构，新增 BR 字段：<br>
+                                • • • • Toll Fee：展示路段高速费，联动地图路径实时计算。<br>
+                                • • • • Potential Missed PUP：标记可能遗漏的揽收点，提供“强制分配”选项。<br>
+                            </span>
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">React</span>
+                            <span class="tag">Vue2</span>
+                            <span class="tag">Vuex</span>
+                            <span class="tag">Leaflet</span>
+                            <span class="tag">路径优化算法</span>
+                            <span class="tag">RESTful API</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -646,6 +723,11 @@
                 <div class="skill-chip">
                     <i class="fab fa-react"></i>
                     React.js
+                </div>
+
+                <div class="skill-chip">
+                    <i class="fas fa-vue"></i>
+                    Vue
                 </div>
                 <div class="skill-chip">
                     <i class="fab fa-js"></i>
@@ -671,10 +753,6 @@
                     <i class="fas fa-box"></i>
                     Webpack
                 </div>
-                <div class="skill-chip">
-                    <i class="fas fa-check-circle"></i>
-                    Jest
-                </div>
             </div>
         </section>
 
@@ -684,44 +762,64 @@
             <p>在Shopee实习期间，我有幸与以下团队成员共同合作：</p>
             <div class="team-members">
                 <div class="team-member">
-<!--                    <img src="https://via.placeholder.com/80/FFD700/333?text=导师" alt="团队成员" class="member-avatar">-->
-                    <div class="member-name">Huang Jialin</div>
-                    <div class="member-role">SPX团队FE技术负责人</div>
+                    <div class="member-name">Jialin.Huang</div>
+                    <div class="member-role">SPX FE Leader</div>
                 </div>
                 <div class="team-member">
-<!--                    <img src="https://via.placeholder.com/80/FFA500/333?text=成员" alt="团队成员" class="member-avatar">-->
-                    <div class="member-name">谢亮（leader）</div>
-                    <div class="member-role">FE</div>
+                    <div class="member-name">liang.xie</div>
+                    <div class="member-role">FE Common Group Leader</div>
                 </div>
                 <div class="team-member">
-<!--                    <img src="https://via.placeholder.com/80/FFA500/333?text=成员" alt="团队成员" class="member-avatar">-->
-                    <div class="member-name">王子遨（mt）</div>
-                    <div class="member-role">FE</div>
+                    <div class="member-name">ziao.wang</div>
+                    <div class="member-role">FE Member(mt)</div>
                 </div>
                 <div class="team-member">
-<!--                    <img src="https://via.placeholder.com/80/FFA500/333?text=成员" alt="团队成员" class="member-avatar">-->
-                    <div class="member-name">董云灿</div>
-                    <div class="member-role">BE</div>
+                    <div class="member-name">guofeng.ye</div>
+                    <div class="member-role">FE Member</div>
                 </div>
                 <div class="team-member">
-<!--                    <img src="https://via.placeholder.com/80/FFA500/333?text=成员" alt="团队成员" class="member-avatar">-->
-                    <div class="member-name">周聪</div>
-                    <div class="member-role">BE</div>
+                    <div class="member-name">yuncan.dong</div>
+                    <div class="member-role">SPX BE</div>
                 </div>
                 <div class="team-member">
-<!--                    <img src="https://via.placeholder.com/80/FFA500/333?text=成员" alt="团队成员" class="member-avatar">-->
-                    <div class="member-name">张圆圆</div>
-                    <div class="member-role">QA</div>
+                    <div class="member-name">cong.zhou</div>
+                    <div class="member-role">SPX BE</div>
                 </div>
                 <div class="team-member">
-<!--                    <img src="https://via.placeholder.com/80/FFA500/333?text=成员" alt="团队成员" class="member-avatar">-->
-                    <div class="member-name">徐菁琪</div>
-                    <div class="member-role">PD</div>
+                    <div class="member-name">cong.zhou</div>
+                    <div class="member-role">SPX BE</div>
                 </div>
                 <div class="team-member">
-<!--                    <img src="https://via.placeholder.com/80/FFA500/333?text=成员" alt="团队成员" class="member-avatar">-->
-                    <div class="member-name">纪雪丽</div>
-                    <div class="member-role">PM</div>
+                    <div class="member-name">cong.zhou</div>
+                    <div class="member-role">SPX BE</div>
+                </div>
+                <div class="team-member">
+                    <div class="member-name">jingying.xie</div>
+                    <div class="member-role">SPX BE</div>
+                </div>
+                <div class="team-member">
+                    <div class="member-name">circle.zhang</div>
+                    <div class="member-role">SPX QA</div>
+                </div>
+                <div class="team-member">
+                    <div class="member-name">haiying.huang</div>
+                    <div class="member-role">SPX QA</div>
+                </div>
+                <div class="team-member">
+                    <div class="member-name">circle.zhang</div>
+                    <div class="member-role">SPX QA</div>
+                </div>
+                <div class="team-member">
+                    <div class="member-name">qingqi.xu</div>
+                    <div class="member-role">SPX PD</div>
+                </div>
+                <div class="team-member">
+                    <div class="member-name">xueli.ji</div>
+                    <div class="member-role">SPX PM</div>
+                </div>
+                <div class="team-member">
+                    <div class="member-name">chunyu.wu</div>
+                    <div class="member-role">SPX HR</div>
                 </div>
             </div>
         </section>
